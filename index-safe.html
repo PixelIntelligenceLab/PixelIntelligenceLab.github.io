@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pixel Intelligence Lab | Medical Imaging AI — Endoscopy, MRI, CT</title>
+<meta name="description" content="Pixel Intelligence Lab LLC provides clinical AI validation, dataset strategy and technical advisory for medical imaging teams working in endoscopy, MRI and CT.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://pixelintelligencelab.github.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pixel Intelligence Lab">
+<meta property="og:title" content="Pixel Intelligence Lab — AI for Medical Imaging">
+<meta property="og:description" content="Clinical AI validation, dataset strategy and advisory for medical imaging teams. Independent evaluation across scanners, sites and populations.">
+<meta property="og:url" content="https://pixelintelligencelab.github.io/">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/208111502?v=4">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pixel Intelligence Lab — AI for Medical Imaging">
+<meta name="twitter:description" content="Clinical AI validation, dataset strategy and advisory for medical imaging teams.">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/208111502?v=4">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Pixel Intelligence Lab LLC",
+  "alternateName": "Pixel Intelligence Lab",
+  "url": "https://pixelintelligencelab.github.io/",
+  "logo": "https://avatars.githubusercontent.com/u/208111502?v=4",
+  "email": "contact@pixelintelligencelab.com",
+  "description": "Pixel Intelligence Lab LLC provides clinical AI validation, benchmarking, dataset strategy and technical advisory for medical imaging teams working in endoscopy, MRI, CT, dental radiography and digital pathology.",
+  "foundingLocation": { "@type": "Place", "name": "United States" },
+  "areaServed": "Worldwide",
+  "knowsAbout": [
+    "Medical image segmentation",
+    "Medical imaging AI",
+    "Video capsule endoscopy",
+    "Colonoscopy polyp detection",
+    "Liver MRI analysis",
+    "Dental radiograph analysis",
+    "Low-dose CT denoising",
+    "Digital pathology",
+    "Clinical AI validation",
+    "Out-of-distribution evaluation"
+  ],
+  "sameAs": [
+    "https://github.com/PixelIntelligenceLab",
+    "https://debeshjha.com/"
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F7F8F6;
+  --panel:#FFFFFF;
+  --ink:#0D1A1C;
+  --ink-soft:#44585C;
+  --ink-faint:#7C8E91;
+  --teal:#0A6165;
+  --teal-deep:#073538;
+  --cyan:#2BB3C4;
+  --green:#3AAE7C;
+  --line:#DBE4E2;
+  --line-soft:#EAF0EE;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  --serif:'Newsreader',Georgia,serif;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.14;letter-spacing:-0.012em}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+@media(max-width:600px){.wrap{padding:0 20px}}
+
+/* ---------- Header ---------- */
+.site-head{
+  position:sticky;top:0;z-index:50;
+  background:rgba(247,248,246,.9);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:600;font-size:1.08rem;color:var(--ink);text-decoration:none;white-space:nowrap}
+.brand svg{display:block;flex-shrink:0}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:.9rem;font-weight:500}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{font-size:.88rem;font-weight:600;text-decoration:none;color:var(--teal);border:1.5px solid var(--line);padding:8px 15px;border-radius:5px;white-space:nowrap}
+.nav-cta:hover{border-color:var(--teal);background:var(--panel)}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{padding:82px 0 64px;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+@media(max-width:880px){.hero{grid-template-columns:1fr;gap:44px;padding:52px 0 44px}}
+.hero h1{font-size:clamp(2.45rem,5.4vw,4rem);letter-spacing:-0.022em}
+.hero .lede{margin-top:22px;font-size:1.13rem;color:var(--ink-soft);max-width:33em}
+.cta-row{margin-top:34px;display:flex;gap:13px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:.95rem;padding:13px 24px;border-radius:6px}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-deep)}
+.btn-ghost{border:1.5px solid var(--line);color:var(--ink);background:var(--panel)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+/* Scan viewer */
+.scan{background:#071114;border-radius:11px;padding:17px;box-shadow:0 28px 64px -34px rgba(7,53,56,.55)}
+.scan-meta{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.67rem;color:#6E9599;letter-spacing:.04em}
+.scan svg{width:100%;height:auto;display:block;margin:11px 0}
+
+/* ---------- Proof strip ---------- */
+.proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.proof-grid{grid-template-columns:1fr}}
+.proof-item{padding:28px 26px;border-left:1px solid var(--line-soft)}
+.proof-item:first-child{border-left:0}
+@media(max-width:820px){
+  .proof-item{border-left:0}
+  .proof-item+.proof-item{border-top:1px solid var(--line-soft)}
+}
+.proof-item .figure{font-family:var(--serif);font-size:1.5rem;font-weight:600;display:block;line-height:1.2}
+.proof-item p{font-size:.88rem;color:var(--ink-soft);margin-top:6px}
+
+/* ---------- Sections ---------- */
+section{padding:78px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.section-head{max-width:46em}
+h2{font-size:clamp(1.75rem,3.5vw,2.45rem)}
+.section-head p{margin-top:15px;color:var(--ink-soft)}
+
+/* ---------- Focus worklist ---------- */
+.worklist{list-style:none;margin-top:46px;border-top:1px solid var(--line)}
+.study{display:grid;grid-template-columns:230px 1fr;gap:34px;padding:30px 0;border-bottom:1px solid var(--line)}
+@media(max-width:800px){.study{grid-template-columns:1fr;gap:14px;padding:26px 0}}
+.study-key .domain{font-family:var(--mono);font-size:.74rem;color:var(--teal);letter-spacing:.03em;display:block}
+.study-key .status{display:inline-flex;align-items:center;gap:7px;margin-top:9px;font-size:.79rem;color:var(--ink-soft)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.dot.live{background:var(--green)}
+.dot.early{background:#C3D2D2}
+.study h3{font-size:1.28rem}
+.study p{margin-top:9px;color:var(--ink-soft);font-size:.97rem;max-width:56em}
+.study .who{margin-top:13px;font-size:.84rem;color:var(--ink-faint)}
+.ruo{margin-top:26px;font-size:.84rem;color:var(--ink-faint)}
+
+/* ---------- Capabilities ---------- */
+.cap-grid{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+@media(max-width:720px){.cap-grid{grid-template-columns:1fr}}
+.cap{background:var(--panel);padding:30px 28px}
+.cap h3{font-size:1.14rem;margin-bottom:9px}
+.cap p{font-size:.94rem;color:var(--ink-soft)}
+
+/* ---------- Repos ---------- */
+.repo-grid{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.repo-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.repo-grid{grid-template-columns:1fr}}
+.repo{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px;display:flex;flex-direction:column;text-decoration:none;color:var(--ink)}
+.repo:hover{border-color:var(--teal)}
+.repo h3{font-family:var(--mono);font-size:.98rem;font-weight:500;color:var(--teal);letter-spacing:-0.01em}
+.repo p{font-size:.88rem;color:var(--ink-soft);margin-top:8px;flex:1}
+.repo .kind{font-family:var(--mono);font-size:.7rem;color:var(--ink-faint);margin-top:15px}
+.attrib{margin-top:24px;font-size:.85rem;color:var(--ink-faint);max-width:52em}
+
+/* ---------- Founder ---------- */
+.founder{display:grid;grid-template-columns:.85fr 1.15fr;gap:46px;align-items:start;margin-top:44px}
+@media(max-width:820px){.founder{grid-template-columns:1fr;gap:32px}}
+.founder-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:28px}
+.founder-card h3{font-size:1.32rem}
+.founder-card .role{font-family:var(--mono);font-size:.73rem;color:var(--teal);margin:7px 0 15px;display:block}
+.founder-card .affil{font-size:.93rem;color:var(--ink-soft)}
+.founder-card .indep{font-size:.83rem;color:var(--ink-faint);margin-top:14px;padding-top:14px;border-top:1px solid var(--line-soft)}
+.founder-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.founder-links a{font-size:.79rem;font-family:var(--mono);text-decoration:none;border:1px solid var(--line);padding:5px 10px;border-radius:4px}
+.founder-links a:hover{border-color:var(--teal)}
+.founder-bio{color:var(--ink-soft)}
+.founder-bio p+p{margin-top:15px}
+.founder-bio .pull{font-family:var(--serif);font-size:1.22rem;line-height:1.42;color:var(--ink);border-left:2px solid var(--cyan);padding-left:20px}
+
+/* ---------- Contact ---------- */
+.contact-box{
+  margin-top:40px;background:var(--teal-deep);color:#E6F1F0;border-radius:12px;
+  padding:46px 42px;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+}
+.contact-box h3{font-size:1.65rem;color:#fff;max-width:17em}
+.contact-box p{color:#A9C8C9;margin-top:9px;max-width:34em;font-size:.97rem}
+.contact-box .btn-primary{background:var(--cyan);color:var(--ink)}
+.contact-box .btn-primary:hover{background:#fff}
+
+footer{padding:34px 0 52px;font-size:.85rem;color:var(--ink-faint)}
+.foot-legal{border-top:1px solid var(--line);padding-top:26px;max-width:62em}
+.foot-legal p+p{margin-top:9px}
+.foot-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:22px}
+footer a{color:var(--ink-soft)}
+
+@media (prefers-reduced-motion:no-preference){
+  .mask-px{animation:reveal .55s ease-out both}
+  @keyframes reveal{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-head">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Pixel Intelligence Lab home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="1" y="1" width="24" height="24" rx="3" fill="none" stroke="#0A6165" stroke-width="2"/>
+        <rect x="6" y="6" width="6" height="6" fill="#2BB3C4"/>
+        <rect x="14" y="6" width="6" height="6" fill="#0A6165"/>
+        <rect x="6" y="14" width="6" height="6" fill="#0A6165"/>
+        <rect x="14" y="14" width="6" height="6" fill="#3AAE7C"/>
+      </svg>
+      Pixel Intelligence Lab
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="#focus">Where we focus</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#research">Open research</a></li>
+        <li><a href="#founder">Founder</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#contact">Start a conversation</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="wrap hero">
+    <div>
+      <h1>Imaging AI that survives contact with the clinic.</h1>
+      <p class="lede">Most medical imaging models are never tested outside the data they were trained on. We help teams find out where theirs breaks — across scanners, sites and patient populations — and design the data and evaluation needed to fix it.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Start a conversation</a>
+        <a class="btn btn-ghost" href="#focus">Where we focus</a>
+      </div>
+    </div>
+
+    <figure class="scan" aria-label="Stylized pixel grid showing a segmentation mask over a medical scan">
+      <div class="scan-meta"><span>(0008,103E) SERIES 001 · AX T2</span><span>SEG: POLYP</span></div>
+      <svg id="pixgrid" viewBox="0 0 300 300" role="img" aria-hidden="true"></svg>
+      <div class="scan-meta"><span>PIXEL INTELLIGENCE LAB</span><span>W:400 L:40</span></div>
+    </figure>
+  </div>
+
+  <!-- PROOF -->
+  <div class="proof">
+    <div class="wrap">
+      <div class="proof-grid">
+        <div class="proof-item">
+          <span class="figure">A decade of peer review</span>
+          <p>Our founder's published research in medical imaging has been cited more than 13,000 times.</p>
+        </div>
+        <div class="proof-item">
+          <span class="figure">Openly adopted</span>
+          <p>Datasets and architectures he co-developed with academic collaborators are used worldwide, including in NVIDIA's Clara platform.</p>
+        </div>
+        <div class="proof-item">
+          <span class="figure">Evaluation first</span>
+          <p>Out-of-distribution testing and cross-site generalization are the core of how we work, not an afterthought.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOCUS -->
+  <section id="focus">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Where we focus</h2>
+        <p>Imaging domains where we have deep technical grounding and where the clinical bottleneck is well understood. These are areas of active engagement and development, not cleared products.</p>
+      </div>
+
+      <ul class="worklist">
+
+        <li class="study">
+          <div class="study-key">
+            <span class="domain">Capsule endoscopy</span>
+            <span class="status"><span class="dot"></span>In development</span>
+          </div>
+          <div>
+            <h3>Reading assistance for capsule studies</h3>
+            <p>A single capsule study runs to tens of thousands of frames and hours of expert reading. We develop triage approaches that rank frames by clinical significance and abstain rather than guess when confidence is low, with evaluation designed around performance on data the model has never seen.</p>
+            <p class="who">Relevant to GI practices, capsule device manufacturers and reading services.</p>
+          </div>
+        </li>
+
+        <li class="study">
+          <div class="study-key">
+            <span class="domain">Colonoscopy</span>
+            <span class="status"><span class="dot"></span>In development</span>
+          </div>
+          <div>
+            <h3>Polyp detection and segmentation at video rates</h3>
+            <p>Real-time detection and delineation built on openly published architectures and benchmarks. Our emphasis is on how these models behave across centers and scope generations, and on measuring them against the outcome clinicians care about — adenoma detection rate — rather than a single held-out split.</p>
+            <p class="who">Relevant to endoscopy tower and scope manufacturers, and ambulatory surgery centers.</p>
+          </div>
+        </li>
+
+        <li class="study">
+          <div class="study-key">
+            <span class="domain">Liver MRI</span>
+            <span class="status"><span class="dot"></span>In development</span>
+          </div>
+          <div>
+            <h3>Non-invasive liver assessment</h3>
+            <p>Volumetric segmentation and staging of chronic liver disease from multiparametric MRI, with calibrated uncertainty so borderline studies are flagged instead of silently scored. Much of the practical work is the pipeline around the model: DICOM in, structured report out.</p>
+            <p class="who">Relevant to radiology groups, hepatology clinics and imaging endpoints in trials.</p>
+          </div>
+        </li>
+
+        <li class="study">
+          <div class="study-key">
+            <span class="domain">Dental radiography</span>
+            <span class="status"><span class="dot early"></span>Exploratory</span>
+          </div>
+          <div>
+            <h3>Structured reading of panoramic and periapical images</h3>
+            <p>Vision-language approaches that answer clinical questions about a radiograph and draft structured findings. The target is the volume problem in general dentistry: many images, thin radiology support, and wide variance between readers.</p>
+            <p class="who">Relevant to dental service organizations and dental imaging software vendors.</p>
+          </div>
+        </li>
+
+        <li class="study">
+          <div class="study-key">
+            <span class="domain">Low-dose CT</span>
+            <span class="status"><span class="dot early"></span>Exploratory</span>
+          </div>
+          <div>
+            <h3>Diagnostic quality at reduced dose</h3>
+            <p>Generative denoising for low-dose CT, assessed by task-based detectability rather than PSNR alone, and designed to fit existing reconstruction pipelines without retraining on site data.</p>
+            <p class="who">Relevant to CT manufacturers and imaging centers under dose-reduction mandates.</p>
+          </div>
+        </li>
+
+        <li class="study">
+          <div class="study-key">
+            <span class="domain">Digital pathology</span>
+            <span class="status"><span class="dot early"></span>Exploratory</span>
+          </div>
+          <div>
+            <h3>Classification without a labeled training set</h3>
+            <p>Retrieval-based classification over frozen self-supervised features with confidence-filtered abstention: a lab supplies a small reference gallery instead of thousands of annotated slides. This removes the annotation bottleneck that stalls most pathology pilots before they start.</p>
+            <p class="who">Relevant to pathology labs, contract research organizations and biobanks.</p>
+          </div>
+        </li>
+
+        <li class="study">
+          <div class="study-key">
+            <span class="domain">Validation service</span>
+            <span class="status"><span class="dot live"></span>Available now</span>
+          </div>
+          <div>
+            <h3>Generalization audit</h3>
+            <p>Independent stress-testing of your model, not ours. Cross-scanner, cross-site and cross-device evaluation, plus model-selection stability analysis. Most teams have never seen their model's numbers on data from outside their own institution, and that gap is usually where deployments fail.</p>
+            <p class="who">Relevant to medtech teams preparing regulatory submissions or partner pilots.</p>
+          </div>
+        </li>
+
+      </ul>
+
+      <p class="ruo">Research use only. Nothing described here is FDA cleared or intended for diagnostic use.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How we work with teams</h2>
+        <p>Four connected practices. Engagements are scoped as independent consulting work.</p>
+      </div>
+      <div class="cap-grid">
+        <div class="cap">
+          <h3>Validation and benchmarking</h3>
+          <p>Statistically grounded evaluation: out-of-distribution testing, cross-scanner generalization, uncertainty quantification and diagnostic accuracy study design built toward regulatory-grade evidence.</p>
+        </div>
+        <div class="cap">
+          <h3>Dataset strategy</h3>
+          <p>How much data, from how many sites, annotated by whom, and to what protocol. Inter-reader analysis, annotation guidelines, and honest assessment of whether a dataset can support the claim you want to make.</p>
+        </div>
+        <div class="cap">
+          <h3>Model development</h3>
+          <p>Segmentation and detection architectures for endoscopy, MRI and CT, including real-time constraints, calibrated confidence, and models that decline to answer when they should.</p>
+        </div>
+        <div class="cap">
+          <h3>Technical advisory</h3>
+          <p>Design review, literature and competitive assessment, and second opinions for healthcare AI teams deciding what to build, what to license and what to abandon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN RESEARCH -->
+  <section id="research">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Open research we build on</h2>
+        <p>These datasets and architectures came out of academic research by our founder and his collaborators at their respective institutions. They are open scientific resources, and they inform how we work.</p>
+      </div>
+      <div class="repo-grid">
+        <a class="repo" href="https://github.com/PixelIntelligenceLab/PolypDB" rel="noopener">
+          <h3>PolypDB</h3>
+          <p>A curated multi-center dataset for developing AI algorithms in colonoscopy.</p>
+          <span class="kind">Dataset · Colonoscopy</span>
+        </a>
+        <a class="repo" href="https://github.com/PixelIntelligenceLab/Kvasir-SEG" rel="noopener">
+          <h3>Kvasir-SEG</h3>
+          <p>A widely used segmented polyp dataset, cited across the medical imaging literature and adopted in NVIDIA Clara.</p>
+          <span class="kind">Dataset · Segmentation</span>
+        </a>
+        <a class="repo" href="https://github.com/PixelIntelligenceLab/CirrMRI600PLUS" rel="noopener">
+          <h3>CirrMRI600+</h3>
+          <p>Large-scale MRI collection and segmentation of cirrhotic liver for non-invasive liver disease research.</p>
+          <span class="kind">Dataset · Liver MRI</span>
+        </a>
+        <a class="repo" href="https://github.com/PixelIntelligenceLab/GastroVision" rel="noopener">
+          <h3>GastroVision</h3>
+          <p>Multi-class endoscopy image dataset for computer-aided gastrointestinal disease detection.</p>
+          <span class="kind">Dataset · Endoscopy</span>
+        </a>
+        <a class="repo" href="https://github.com/PixelIntelligenceLab/TransNetR" rel="noopener">
+          <h3>TransNetR</h3>
+          <p>Transformer-based residual network for polyp segmentation with multi-center out-of-distribution testing.</p>
+          <span class="kind">Model · Transformer</span>
+        </a>
+        <a class="repo" href="https://github.com/PixelIntelligenceLab/FocusNet" rel="noopener">
+          <h3>FocusNet</h3>
+          <p>Deep learning architecture for focused, accurate medical image segmentation.</p>
+          <span class="kind">Model · Segmentation</span>
+        </a>
+      </div>
+      <p class="attrib">These are academic research releases, not products of this company. Rights, licensing terms and permitted uses are set by the originating institutions and their collaborators — please refer to each repository and its associated publication.</p>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section id="founder">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Founded on peer-reviewed science</h2>
+      </div>
+      <div class="founder">
+        <div class="founder-card">
+          <h3>Debesh Jha, Ph.D.</h3>
+          <span class="role">Founder · Pixel Intelligence Lab LLC</span>
+          <p class="affil">Computer scientist working in medical imaging AI, with a decade of peer-reviewed research in gastrointestinal endoscopy, MRI and CT. IEEE Senior Member.</p>
+          <p class="indep">Affiliation shown for identification only. This company is independent and its work is not conducted on behalf of, or endorsed by, any academic institution.</p>
+          <div class="founder-links">
+            <a href="https://debeshjha.com/" rel="noopener">Website</a>
+            <a href="https://scholar.google.com/citations?user=mMTyE68AAAAJ" rel="noopener">Scholar</a>
+            <a href="https://github.com/DebeshJha" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/debesh-jha-071462aa/" rel="noopener">LinkedIn</a>
+            <a href="https://orcid.org/0000-0002-8078-6730" rel="noopener">ORCID</a>
+          </div>
+        </div>
+        <div class="founder-bio">
+          <p class="pull">The gap worth closing is between what imaging AI achieves in a paper and what it delivers at the bedside.</p>
+          <p>Pixel Intelligence Lab grows out of a decade of work at the intersection of computer vision and clinical medicine — research on open datasets and segmentation architectures for gastrointestinal imaging, published at MICCAI, IEEE TMI, ICASSP, MIDL and leading clinical journals.</p>
+          <p>Closing that gap means multi-center data, honest out-of-distribution evaluation, and models designed for the realities of clinical deployment, including the cases where the right answer is for the model to decline to answer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <h2>Let's build clinically credible AI</h2>
+      <div class="contact-box">
+        <div>
+          <h3>Work with Pixel Intelligence Lab</h3>
+          <p>Clinical AI validation, dataset strategy, model development and technical advisory for healthcare and medtech teams. Tell us what you're trying to deploy and where it's failing.</p>
+        </div>
+        <a class="btn btn-primary" href="mailto:contact@pixelintelligencelab.com">Email the lab</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-legal">
+      <p>Pixel Intelligence Lab LLC is an independent company. It is not affiliated with, sponsored by, or endorsed by any university, hospital or government agency, and nothing on this site is issued on behalf of such an institution.</p>
+      <p>Research use only. Nothing described on this site is FDA cleared or approved, and nothing here is intended for the diagnosis or treatment of disease. Open datasets and models referenced on this site remain the work of their originating research collaborations and are governed by their own licenses.</p>
+      <div class="foot-meta">
+        <span>© 2026 Pixel Intelligence Lab LLC</span>
+        <span><a href="https://github.com/PixelIntelligenceLab" rel="noopener">GitHub</a> · <a href="https://debeshjha.com/" rel="noopener">Founder</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Signature graphic: pixel grid with a segmentation mask revealed once on load.
+(function(){
+  var svg = document.getElementById('pixgrid');
+  if(!svg) return;
+  var N = 15, S = 20, ns = 'http://www.w3.org/2000/svg';
+  var mask = {}, cx = 8.2, cy = 7.1;
+  for (var y=0;y<N;y++) for (var x=0;x<N;x++){
+    var d = Math.hypot(x-cx, y-cy) + Math.sin(x*1.7)*0.8 + Math.cos(y*1.3)*0.7;
+    if (d < 3.4) mask[x+','+y] = 1;
+    else if (d < 4.2) mask[x+','+y] = 2;
+  }
+  var i = 0;
+  for (var y=0;y<N;y++) for (var x=0;x<N;x++){
+    var r = document.createElementNS(ns,'rect');
+    r.setAttribute('x', x*S+1); r.setAttribute('y', y*S+1);
+    r.setAttribute('width', S-2); r.setAttribute('height', S-2);
+    r.setAttribute('rx', 2);
+    var m = mask[x+','+y];
+    var g = 20 + ((x*7 + y*13 + x*y) % 5) * 9;
+    if (m === 1){
+      r.setAttribute('fill', '#2BB3C4'); r.setAttribute('opacity', '0.93');
+      r.setAttribute('class','mask-px');
+      r.style.transformOrigin = (x*S + S/2) + 'px ' + (y*S + S/2) + 'px';
+      r.style.animationDelay = (0.45 + (i%40)*0.028) + 's';
+    } else if (m === 2){
+      r.setAttribute('fill', '#3AAE7C'); r.setAttribute('opacity', '0.5');
+      r.setAttribute('class','mask-px');
+      r.style.transformOrigin = (x*S + S/2) + 'px ' + (y*S + S/2) + 'px';
+      r.style.animationDelay = (0.25 + (i%40)*0.028) + 's';
+    } else {
+      r.setAttribute('fill', 'rgb('+g+','+(g+12)+','+(g+14)+')');
+    }
+    svg.appendChild(r);
+    i++;
+  }
+})();
+</script>
+
+</body>
+</html>
